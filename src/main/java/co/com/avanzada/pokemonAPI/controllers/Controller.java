@@ -20,15 +20,30 @@ public class Controller {
         return pokemonService.retrieveAll();
     }
 
-    @PostMapping("/save-new")
+    @GetMapping("/retrieve-especific/{id}")
+    public Pokemon getPokemonById(@PathVariable Long id) {
+        return pokemonService.retrieveById(id);
+    }
+
+    @PostMapping("/save-pokemon")
     @ResponseStatus(HttpStatus.CREATED)
     public Pokemon saveNewPokemon(@RequestBody Pokemon pokemon) {
-        return pokemonService.saveNew(pokemon);
+        return pokemonService.savePokemon(pokemon);
     }
 
     @DeleteMapping("/delete-pokemon/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePokemon(@PathVariable Long id) {
         pokemonService.delete(id);
+    }
+
+    @PutMapping("/update-pokemon/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Pokemon updatePokemon(@PathVariable Long id, @RequestBody Pokemon pokemon) {
+        Pokemon pokemon_update = pokemonService.retrieveById(id);
+        pokemon_update.setName(pokemon.getName());
+        pokemon_update.setCategory(pokemon.getCategory());
+        pokemon_update.setDescription(pokemon.getDescription());
+        return pokemonService.savePokemon(pokemon_update);
     }
 }

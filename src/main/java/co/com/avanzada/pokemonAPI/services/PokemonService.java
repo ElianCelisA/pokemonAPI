@@ -18,7 +18,7 @@ public class PokemonService implements IPokemonService {
     }
 
     @Override
-    public Pokemon saveNew(Pokemon pokemon) {
+    public Pokemon savePokemon(Pokemon pokemon) {
         return pokemonDao.save(pokemon);
     }
 
@@ -26,4 +26,11 @@ public class PokemonService implements IPokemonService {
     public void delete(Long id) {
         pokemonDao.deleteById(id);
     }
+
+    @Override
+    public Pokemon retrieveById(Long id) {
+        return pokemonDao.findById(id).orElse(new Pokemon());
+    }
+
+
 }
