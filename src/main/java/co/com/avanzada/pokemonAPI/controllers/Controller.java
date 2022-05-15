@@ -43,7 +43,12 @@ public class Controller {
         Pokemon pokemon_update = pokemonService.retrieveById(id);
         pokemon_update.setName(pokemon.getName());
         pokemon_update.setCategory(pokemon.getCategory());
+        pokemon_update.setHeight(pokemon.getHeight());
+        pokemon_update.setWeight(pokemon.getWeight());
         pokemon_update.setDescription(pokemon.getDescription());
+        pokemon_update.setType(pokemon.getType());
+        pokemon_update.setAbilities(pokemon.getAbilities());
+        pokemon_update.setWeaknesses(pokemon.getWeaknesses());
         return pokemonService.savePokemon(pokemon_update);
     }
 }
